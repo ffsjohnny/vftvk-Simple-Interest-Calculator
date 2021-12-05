@@ -1,54 +1,32 @@
 function compute()
-{
-//principal variable
+{//identifiers and validation box
+    var principal = document.getElementById("principal").value;
 
-var principal = document.getElementById("principal").value; 
+    if(principal == "" || principal <= 0)
+    {
+        alert("Enter a positive number");
+        document.getElementById("principal").focus();
+        return;
+    }
+//date creation and calculations
+    var rate = document.getElementById("rate").value;
+    var years = document.getElementById("years").value;
+    var interest = principal * years * rate / 100;
+
+    var dateNow = new Date();
+    var yearNow = parseInt(dateNow.getFullYear()) + parseInt(years);
     
-//rate variable
-var rate = document.getElementById("rate").value;
-
-//years variable
- 
-var years = document.getElementById("years").value;
-
-//interest variable and calculation
-
-var interest = principal * years * rate /100;    
-
-//logic for conversion of years in the future
-
-var year = new Date().getFullYear()+parseInt(years);
-
-//display of range slider function
-     
-function updateRate() 
+    var resultDisplay = document.getElementById("result");
+    resultDisplay.innerHTML = "If you deposit " + "<span class='highlight'>" + principal + "</span>."  + ", <br> at an interest rate of "+ "<span class='highlight'>" + rate + "</span>%." + "<br> You will receive an amount of " + "<span class='highlight'>" + interest + "</span>" + ", <br> in the year " + "<span class='highlight'>" + yearNow + "</span>";
+}
+//to update the values of the interest when moving the slider
+function SliderValue()
 {
-    var rateval = document.getElementById("rate").value;
-    
-    document.getElementById("rate_val").innerText=rateval;
-
-//on change event to display range slider function
-
-document.getElementById("rate_val").onchange = function() {myFunction()};
-function myFunction() {
-  var x = document.getElementById("rate_val").value;
-
-//Text to be displayed upon pressing compute interest
-
-  document.getElementById("result").innerHTML="If you deposit "+principal+",\<br\>at an interest rate of "+rate+"%\<br\>You will receive an amount of "+amount+",\<br\>in the year "+year+"\<br\>"
-}
-document.getElementById("result").innerHTML="If you deposit "+principal+",\<br\>at an interest rate of "+rate+"%\<br\>You will receive an amount of "+amount+",\<br\>in the year "+year+"\<br\>"
-}
-{
-//validation for Principal box. Shows alert on 0 or negative 
-
-if (Principal.value 0 or < 0) {
-alert "Enter a positive number
-principal.focus()";
-return false;
-}
-
-
-
-}
-        
+    var slider = document.getElementById("rate");
+    var output = document.getElementById("rate_display");
+    output.innerHTML = slider.value; 
+    slider.oninput = function() 
+    {
+        output.innerHTML = this.value;
+    }  
+}   
